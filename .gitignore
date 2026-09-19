@@ -12,3 +12,7 @@ logs/
 outputs/
 db/
 .pytest_cache/
+
+*.pre_cloud
+*.bak
+*.pyc

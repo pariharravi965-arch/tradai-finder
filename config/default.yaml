@@ -1,0 +1,133 @@
+# TradAI Finder — Delta Exchange India
+finder_version: "1.1.0-delta"
+law_version: "1.0"
+exchange: "delta_india"
+
+coins:
+  - BTCUSD
+  - ETHUSD
+  - SOLUSD
+  - XRPUSD
+  - BNBUSD
+  - DOGEUSD
+  - ADAUSD
+  - AVAXUSD
+  - LINKUSD
+  - DOTUSD
+  - TRXUSD
+  - LTCUSD
+  - UNIUSD
+  - SEIUSD
+  - WIFUSD
+  - TIAUSD
+  - BCHUSD
+  - NEARUSD
+  - APTUSD
+  - SUIUSD
+  - FILUSD
+  - ARBUSD
+  - OPUSD
+  - AAVEUSD
+  - INJUSD
+
+symbol_aliases:
+  BTC: BTCUSD
+  ETH: ETHUSD
+  SOL: SOLUSD
+  XRP: XRPUSD
+  BNB: BNBUSD
+  DOGE: DOGEUSD
+  BTCUSDT: BTCUSD
+  ETHUSDT: ETHUSD
+
+timeframes:
+  - 15m
+  - 30m
+  - 1h
+  - 2h
+  - 4h
+  - 1d
+all_timeframes:
+  - 1m
+  - 3m
+  - 5m
+  - 15m
+  - 30m
+  - 1h
+  - 2h
+  - 4h
+  - 6h
+  - 1d
+
+primary_timeframes:
+  - 15m
+  - 30m
+  - 1h
+  - 4h
+
+mtf_pairs:
+  - [5m, 15m]
+  - [15m, 1h]
+  - [30m, 1h]
+  - [1h, 4h]
+  - [4h, 1d]
+
+stages:
+  stage_a_days: 8
+  stage_b_days: 60
+  stage_c_days: 365
+  recent_days: 30
+
+walk_forward:
+  - train_days: 30
+    test_days: 7
+  - train_days: 60
+    test_days: 14
+  - train_days: 90
+    test_days: 30
+
+costs:
+  maker_fee: 0.0002
+  taker_fee: 0.0005
+  default_fee: 0.0005
+  slippage_bps: 3.0
+  funding_include: true
+
+risk:
+  default_rr_targets: [1.0, 1.5, 2.0, 2.5, 3.0]
+  default_sl_atr_mult: [1.2, 1.55, 1.85, 2.1]
+  max_leverage_test: [1, 2, 3, 5, 10]
+  account_risk_pct: 0.01
+
+features:
+  atr_period: 14
+  rsi_period: 14
+  macd_fast: 12
+  macd_slow: 26
+  macd_signal: 9
+  volume_ma_period: 20
+  structure_swing_lookback: 5
+  volatility_lookback: 20
+  regime_lookback: 50
+
+data_quality:
+  max_missing_pct: 5.0
+  min_history_days: 30
+  flag_illiquid_volume_usd: 100000
+
+paths:
+  data_raw: "data/raw"
+  data_processed: "data/processed"
+  data_cache: "data/cache"
+  db: "db/tradai_finder.duckdb"
+  outputs: "outputs"
+  logs: "logs"
+
+delta:
+  base_url: "https://api.india.delta.exchange"
+  rate_limit_sleep: 0.12
+  max_candles_per_request: 1800
+
+logging:
+  level: "INFO"
+  file: "logs/finder.log"

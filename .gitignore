@@ -1,0 +1,14 @@
+.env
+*.pem
+*_secret*
+.venv/
+__pycache__/
+
+# Local research data and generated files
+data/raw/
+data/processed/
+data/cache/
+logs/
+outputs/
+db/
+.pytest_cache/

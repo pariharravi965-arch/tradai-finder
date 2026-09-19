@@ -121,6 +121,11 @@ def main():
         help="Seconds between collection cycles",
     )
     parser.add_argument(
+        "--data-dir",
+        default=os.environ.get("TRADAI_DATA_DIR", "/data"),
+        help="Persistent data directory",
+    )
+    parser.add_argument(
         "--max-iters",
         type=int,
         default=0,
@@ -132,7 +137,7 @@ def main():
 
     pub = DeltaPublicExtra()
 
-    base = ROOT / "data" / "raw" / "live"
+    base = Path(args.data_dir) / "live"
     base.mkdir(parents=True, exist_ok=True)
 
     checkpoint = base / "_collector_checkpoint.json"

@@ -36,6 +36,8 @@ def main():
         "--interval", "30",
     ]
 
+    worker_env = os.environ.copy()
+    worker_env["PYTHONPATH"] = os.getcwd() + os.pathsep + worker_env.get("PYTHONPATH", "")
     signal.signal(signal.SIGINT, stop_handler)
     signal.signal(signal.SIGTERM, stop_handler)
 
@@ -43,7 +45,7 @@ def main():
     print(f"data_dir={data_dir}")
 
     collector = subprocess.Popen(collector_cmd)
-    worker = subprocess.Popen(worker_cmd)
+    worker = subprocess.Popen(worker_cmd, env=worker_env)
 
     try:
         while not STOP:
